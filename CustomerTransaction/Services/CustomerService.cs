@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Models;
+using CustomerTransaction.SharedEntities.Models;
 
 namespace CustomerTransaction.Services
 {

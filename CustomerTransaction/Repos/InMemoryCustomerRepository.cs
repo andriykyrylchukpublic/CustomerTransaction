@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Models;
+using CustomerTransaction.SharedEntities.Models;
 
 namespace CustomerTransaction.Repos
 {

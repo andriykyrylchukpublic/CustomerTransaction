@@ -1,4 +1,4 @@
-﻿namespace CustomerTransaction.Models
+﻿namespace CustomerTransaction.SharedEntities.Models
 {
     public enum Status
     {

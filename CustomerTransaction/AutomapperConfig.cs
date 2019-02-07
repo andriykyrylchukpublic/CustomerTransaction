@@ -2,6 +2,7 @@
 
 using System;
 using CustomerTransaction.Models;
+using CustomerTransaction.SharedEntities.Models;
 
 namespace CustomerTransaction
 {

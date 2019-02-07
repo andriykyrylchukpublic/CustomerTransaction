@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using CustomerTransaction.Models;
+using CustomerTransaction.SharedEntities.Models;
 
 namespace CustomerTransaction.Interfaces
 {

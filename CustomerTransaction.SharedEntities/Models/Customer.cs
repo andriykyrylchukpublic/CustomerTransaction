@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CustomerTransaction.Models
+namespace CustomerTransaction.SharedEntities.Models
 {
     public class Customer
     {
