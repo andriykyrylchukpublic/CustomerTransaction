@@ -38,6 +38,8 @@ namespace CustomerTransaction
                 app.UseHsts();
             }
 
+            AutomapperConfig.Initialize();
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }

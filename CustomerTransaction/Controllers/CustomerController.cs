@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +24,7 @@ namespace CustomerTransaction.Controllers
         public IActionResult Get(Inquiry inquiry)
         {
             var customers = _customerService.GetCustomers(inquiry);
-            return Ok(customers);
+            return Ok(Mapper.Map<IEnumerable<CustomerDto>>(customers));
         }
 
         private readonly ICustomerService _customerService;
