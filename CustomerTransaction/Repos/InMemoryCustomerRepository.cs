@@ -10,8 +10,14 @@ namespace CustomerTransaction.Repos
     {
         public IEnumerable<Customer> GetCustomers(Inquiry inquiry)
         {
-            return CreateCustomer().Where(c =>
-                c.CustomerId == inquiry.CustomerId || String.Equals(c.Email, inquiry.Email, StringComparison.InvariantCulture));
+            return CreateCustomer()
+                .Where(c => c.CustomerId == inquiry.CustomerId 
+                || String.Equals(c.Email, inquiry.Email, StringComparison.InvariantCulture))
+                .Select(c =>
+                {
+                    c.Transactions = c.Transactions.Take(LastTransactionsCount);
+                    return c;
+                });
         }
 
         private static IEnumerable<Customer> CreateCustomer()
@@ -26,6 +32,46 @@ namespace CustomerTransaction.Repos
                     Name = "Geralt of Rivia",
                     Transactions = new List<Transaction>
                     {
+                        new Transaction
+                        {
+                            Date = DateTime.MinValue,
+                            Id = 1234567890,
+                            Amount = 1111.00m,
+                            Currency = "RIV",
+                            Status = Status.Success,                      
+                        },
+                        new Transaction
+                        {
+                            Date = DateTime.MinValue,
+                            Id = 1234567890,
+                            Amount = 1111.00m,
+                            Currency = "RIV",
+                            Status = Status.Canceled,                      
+                        },
+                        new Transaction
+                        {
+                            Date = DateTime.MinValue,
+                            Id = 1234567890,
+                            Amount = 1111.00m,
+                            Currency = "RIV",
+                            Status = Status.Success,                      
+                        },
+                        new Transaction
+                        {
+                            Date = DateTime.MinValue,
+                            Id = 1234567890,
+                            Amount = 1111.00m,
+                            Currency = "RIV",
+                            Status = Status.Canceled,                      
+                        },
+                        new Transaction
+                        {
+                            Date = DateTime.MinValue,
+                            Id = 1234567890,
+                            Amount = 1111.00m,
+                            Currency = "RIV",
+                            Status = Status.Failed,                      
+                        },
                         new Transaction
                         {
                             Date = DateTime.MinValue,
@@ -74,5 +120,7 @@ namespace CustomerTransaction.Repos
                 }
             };
         }
+
+        private const Int32 LastTransactionsCount = 5;
     }
 }
