@@ -5,8 +5,8 @@ namespace CustomerTransaction.Models
 {
     public class Inquiry
     {
-        [RegularExpression("^(\\d{1,10})$", ErrorMessage = "Invalid Customer ID")]
-        public String CustomerId { get; set; }
+        [Range(1,9999999999, ErrorMessage = "Invalid Customer ID")]
+        public Int64? CustomerId { get; set; }
 
         [EmailAddress(ErrorMessage = "Invalid Email")]
         [MaxLength(25, ErrorMessage = "Invalid Email")]
