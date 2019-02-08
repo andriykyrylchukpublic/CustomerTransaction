@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Models;
 using CustomerTransaction.SharedEntities.Models;
@@ -12,7 +11,7 @@ namespace CustomerTransaction.Services
         {
             _customerRepository = repo;
         }
-        public IEnumerable<Customer> GetCustomers(Inquiry inquiry)
+        public IEnumerable<Customer> GetCustomers(RequestData inquiry)
         {
             return _customerRepository.GetCustomers(inquiry);
         }

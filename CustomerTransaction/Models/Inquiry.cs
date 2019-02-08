@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CustomerTransaction.Models
 {
     public class Inquiry
     {
-        public Int32 CustomerId { get; set; }
+        [RegularExpression("^(\\d{1,10})$", ErrorMessage = "Invalid Customer ID")]
+        public String CustomerId { get; set; }
+
+        [EmailAddress(ErrorMessage = "Invalid Email")]
+        [MaxLength(25, ErrorMessage = "Invalid Email")]
         public String Email { get; set; }
     }
 }

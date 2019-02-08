@@ -7,6 +7,6 @@ namespace CustomerTransaction.Interfaces
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customer> GetCustomers(Inquiry inquiry);
+        IEnumerable<Customer> GetCustomers(RequestData inquiry);
     }
 }

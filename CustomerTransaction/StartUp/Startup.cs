@@ -1,13 +1,15 @@
-﻿using CustomerTransaction.Interfaces;
+﻿using CustomerTransaction.Data;
+using CustomerTransaction.Interfaces;
 using CustomerTransaction.Repos;
 using CustomerTransaction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CustomerTransaction
+namespace CustomerTransaction.StartUp
 {
     public class Startup
     {
@@ -21,8 +23,10 @@ namespace CustomerTransaction
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CustomerContext>(s => s.UseSqlServer(Configuration["DbSettings:ConnectionString"]));
             services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<ICustomerRepository, InMemoryCustomerRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.Configure<DatabaseSetting>(Configuration.GetSection("DbSettings"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

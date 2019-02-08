@@ -1,4 +1,5 @@
 ﻿using System;
+using CustomerTransaction.StartUp;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 

@@ -9,7 +9,7 @@ namespace CustomerTransaction.Repos
 {
     public class InMemoryCustomerRepository:ICustomerRepository
     {
-        public IEnumerable<Customer> GetCustomers(Inquiry inquiry)
+        public IEnumerable<Customer> GetCustomers(RequestData inquiry)
         {
             return CreateCustomer()
                 .Where(c => c.CustomerId == inquiry.CustomerId 
