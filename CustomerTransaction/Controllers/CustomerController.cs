@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoMapper;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Models;
@@ -25,14 +24,9 @@ namespace CustomerTransaction.Controllers
         [HttpGet]
         public IActionResult Get(Inquiry inquiry)
         {
-            if (String.IsNullOrEmpty(inquiry.CustomerId) && String.IsNullOrEmpty(inquiry.Email))
+            if (inquiry.CustomerId == null && String.IsNullOrEmpty(inquiry.Email))
             {
                 ModelState.AddModelError(nameof(Inquiry), "No inquiry criteria");
-            }
-
-            if (inquiry.CustomerId == String.Empty)
-            {
-                ModelState.AddModelError(nameof(Inquiry), "Invalid Customer ID");
             }
 
             if (!ModelState.IsValid)
@@ -47,7 +41,7 @@ namespace CustomerTransaction.Controllers
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<IEnumerable<CustomerDto>>(customers));
+            return Ok(Mapper.Map<IEnumerable<CustomerOutputDto>>(customers));
         }
 
         private readonly ICustomerService _customerService;

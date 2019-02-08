@@ -10,12 +10,13 @@ namespace CustomerTransaction.StartUp
         {
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Customer, CustomerDto>();
+                cfg.CreateMap<Customer, CustomerOutputDto>();
                 cfg.CreateMap<Transaction, TransactionDto>()
-                    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Enum.GetName(typeof(Status), src.Status)));
+                    .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Enum.GetName(typeof(Status), src.Status)))
+                    .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount.ToString("F")));
 
-                cfg.CreateMap<Inquiry, RequestData>()
-                    .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => Int64.Parse(src.CustomerId)));
+                cfg.CreateMap<Inquiry, RequestData>();
+
             });
         }
     }
