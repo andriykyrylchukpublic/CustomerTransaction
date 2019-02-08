@@ -10,7 +10,7 @@ namespace CustomerTransaction.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
-        public CustomerContext(DbContextOptions<CustomerContext> options):base(options) { }
+        public CustomerContext(DbContextOptions options):base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,8 +20,11 @@ namespace CustomerTransaction.Data
             builder.Entity<Customer>().Property(e => e.Email).HasMaxLength(25);
 
 
-            builder.Entity<Transaction>().HasKey(k => k.Id);
-            builder.Entity<Transaction>().Property(i => i.Id).IsRequired();
+            builder.Entity<Transaction>().HasKey(t => t.Id);
+            builder.Entity<Transaction>().Property(t => t.Id).IsRequired();
+            builder.Entity<Transaction>().Property(t => t.Currency).IsRequired().HasMaxLength(3);
+            builder.Entity<Transaction>().Property(t => t.Status).IsRequired();
+            builder.Entity<Transaction>().Property(t => t.Amount).IsRequired().HasColumnType("decimal(10,2)");
         }
     }
 }
