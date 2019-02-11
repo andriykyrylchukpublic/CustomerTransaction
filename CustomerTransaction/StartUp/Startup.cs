@@ -30,7 +30,11 @@ namespace CustomerTransaction.StartUp
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
+            services.Configure<ApiBehaviorOptions>(opts =>
+            {
+                opts.SuppressModelStateInvalidFilter = true;
+            });
+    }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

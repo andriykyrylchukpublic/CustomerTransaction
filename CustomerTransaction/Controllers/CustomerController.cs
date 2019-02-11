@@ -20,10 +20,15 @@ namespace CustomerTransaction.Controllers
         /// <summary>
         /// Get Customers
         /// </summary>
-        /// <returns></returns>
+        /// <returns>IEnumerable of CustomerOutputDto</returns>
         [HttpGet]
         public IActionResult Get(Inquiry inquiry)
         {
+            if (inquiry is null)
+            {
+                return BadRequest();
+            }
+
             if (inquiry.CustomerId == null && String.IsNullOrEmpty(inquiry.Email))
             {
                 ModelState.AddModelError(nameof(Inquiry), "No inquiry criteria");
