@@ -1,7 +1,6 @@
 ﻿using CustomerTransaction.Data;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Repos;
-using CustomerTransaction.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +27,6 @@ namespace CustomerTransaction.StartUp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CustomerContext>(s => s.UseSqlServer(Configuration["DbSettings:ConnectionString"]));
-            services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<ApiBehaviorOptions>(opts =>

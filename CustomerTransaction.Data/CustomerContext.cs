@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using CustomerTransaction.SharedEntities.Models;
+﻿using CustomerTransaction.SharedEntities.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerTransaction.Data

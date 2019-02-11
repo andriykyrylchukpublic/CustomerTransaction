@@ -12,9 +12,9 @@ namespace CustomerTransaction.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {      
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerRepository customerRepo)
         {
-            _customerService = customerService;
+            _customerRepo = customerRepo;
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace CustomerTransaction.Controllers
         /// </summary>
         /// <returns>IEnumerable of CustomerOutputDto</returns>
         [HttpGet]
-        public IActionResult Get([FromQuery]Inquiry inquiry)
+        public IActionResult GetCustomers([FromQuery]Inquiry inquiry)
         {
             if (inquiry is null)
             {
@@ -39,7 +39,7 @@ namespace CustomerTransaction.Controllers
                 return BadRequest(ModelState);
             }
 
-            var customers = _customerService.GetCustomers(Mapper.Map<RequestData>(inquiry));
+            var customers = _customerRepo.GetCustomers(Mapper.Map<RequestData>(inquiry));
 
             if (!customers.Any())
             {
@@ -49,6 +49,6 @@ namespace CustomerTransaction.Controllers
             return Ok(Mapper.Map<IEnumerable<CustomerOutputDto>>(customers));
         }
 
-        private readonly ICustomerService _customerService;
+        private readonly ICustomerRepository _customerRepo;
     }
 }
