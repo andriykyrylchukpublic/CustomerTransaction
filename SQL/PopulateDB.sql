@@ -1,6 +1,6 @@
-SET IDENTITY_INSERT [CustomerTransactionDataTest].[dbo].[Customers] ON
-SET IDENTITY_INSERT [CustomerTransactionDataTest].[dbo].[Transactions] OFF
-INSERT INTO [CustomerTransactionDataTest].[dbo].[Customers]
+SET IDENTITY_INSERT [CustomerTransactionData].[dbo].[Customers] ON
+SET IDENTITY_INSERT [CustomerTransactionData].[dbo].[Transactions] OFF
+INSERT INTO [CustomerTransactionData].[dbo].[Customers]
   ( [CustomerId], [Name], [Email], [Mobile])
 VALUES
   (1000000000, 'Geralt of Rivia', 'geralt@thewithcer.com', 10000000000),
@@ -9,9 +9,9 @@ VALUES
 
 GO
 
-SET IDENTITY_INSERT [CustomerTransactionDataTest].[dbo].[Customers] OFF
-SET IDENTITY_INSERT [CustomerTransactionDataTest].[dbo].[Transactions] ON
-INSERT INTO [CustomerTransactionDataTest].[dbo].[Transactions]
+SET IDENTITY_INSERT [CustomerTransactionData].[dbo].[Customers] OFF
+SET IDENTITY_INSERT [CustomerTransactionData].[dbo].[Transactions] ON
+INSERT INTO [CustomerTransactionData].[dbo].[Transactions]
   ( [Id],[CustomerId], [Date], [Amount], [Currency], [Status])
 VALUES
   (1, 1000000000, '01.01.2018', 10, 'RIV', 2),

@@ -1,8 +1,8 @@
-IF db_id('CustomerTransactionDataTest') IS NULL 
-    CREATE DATABASE CustomerTransactionDataTest
+IF db_id('CustomerTransactionData') IS NULL 
+    CREATE DATABASE CustomerTransactionData
 GO
 
-CREATE TABLE [CustomerTransactionDataTest].[dbo].[Customers] (
+CREATE TABLE [CustomerTransactionData].[dbo].[Customers] (
     [CustomerId] bigint NOT NULL IDENTITY,
     [Name] nvarchar(30) NULL,
     [Email] nvarchar(25) NULL,
@@ -12,7 +12,7 @@ CREATE TABLE [CustomerTransactionDataTest].[dbo].[Customers] (
 
 GO
 
-CREATE TABLE [CustomerTransactionDataTest].[dbo].[Transactions] (
+CREATE TABLE [CustomerTransactionData].[dbo].[Transactions] (
     [Id] int NOT NULL IDENTITY,
     [CustomerId] bigint NOT NULL,
     [Date] datetime2 NOT NULL,
@@ -25,6 +25,6 @@ CREATE TABLE [CustomerTransactionDataTest].[dbo].[Transactions] (
 
 GO
 
-CREATE INDEX [Transactions_CustomerId] ON [CustomerTransactionDataTest].[dbo].[Transactions] ([CustomerId]);
+CREATE INDEX [Transactions_CustomerId] ON [CustomerTransactionData].[dbo].[Transactions] ([CustomerId]);
 
 
