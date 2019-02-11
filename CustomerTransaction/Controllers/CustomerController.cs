@@ -12,9 +12,10 @@ namespace CustomerTransaction.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {      
-        public CustomerController(ICustomerRepository customerRepo)
+        public CustomerController(ICustomerRepository customerRepo, IMapper mapper)
         {
             _customerRepo = customerRepo;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -39,16 +40,17 @@ namespace CustomerTransaction.Controllers
                 return BadRequest(ModelState);
             }
 
-            var customers = _customerRepo.GetCustomers(Mapper.Map<RequestData>(inquiry));
+            var customers = _customerRepo.GetCustomers(_mapper.Map<RequestData>(inquiry));
 
             if (!customers.Any())
             {
                 return NotFound();
             }
 
-            return Ok(Mapper.Map<IEnumerable<CustomerOutputDto>>(customers));
+            return Ok(_mapper.Map<IEnumerable<CustomerOutputDto>>(customers));
         }
 
         private readonly ICustomerRepository _customerRepo;
+        private readonly IMapper _mapper;
     }
 }

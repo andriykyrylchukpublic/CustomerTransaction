@@ -1,4 +1,5 @@
-﻿using CustomerTransaction.Data;
+﻿using AutoMapper;
+using CustomerTransaction.Data;
 using CustomerTransaction.Interfaces;
 using CustomerTransaction.Repos;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace CustomerTransaction.StartUp
         {
             services.AddDbContext<CustomerContext>(s => s.UseSqlServer(Configuration["DbSettings:ConnectionString"]));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.UseAutomapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<ApiBehaviorOptions>(opts =>
             {
@@ -71,8 +73,6 @@ namespace CustomerTransaction.StartUp
                     });
                 });
             }
-
-            AutomapperConfig.Initialize();
 
             app.UseHttpsRedirection();
 
