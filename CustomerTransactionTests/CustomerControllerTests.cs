@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CustomerTransaction.Controllers;
@@ -11,7 +10,7 @@ using NUnit.Framework;
 
 namespace CustomerTransactionTests
 {
-    public class Tests
+    public class CustomerControllerTests
     {
         [SetUp]
         public void Setup()
@@ -29,7 +28,7 @@ namespace CustomerTransactionTests
             IActionResult result = _customerController.GetCustomers(inquery);
             var badRequest = result as BadRequestObjectResult;
 
-            Assert.IsNotNull(badRequest);
+            Assert.IsNotNull(badRequest, "Response can not be null");
             Assert.IsInstanceOf<BadRequestObjectResult>(badRequest, "The result must be BAD REQUEST");
         }
 
@@ -47,8 +46,8 @@ namespace CustomerTransactionTests
             IActionResult result = _customerController.GetCustomers(inputData);
             var notFound = result as NotFoundResult;
 
-            Assert.IsNotNull(notFound, "Request can not be null");
-            Assert.IsInstanceOf<NotFoundResult>(notFound, "The result must be BAD REQUEST");
+            Assert.IsNotNull(notFound, "Response can not be null");
+            Assert.IsInstanceOf<NotFoundResult>(notFound, "The result must be 404 mot found");
         }
 
         [Test]
@@ -64,8 +63,8 @@ namespace CustomerTransactionTests
             IActionResult result = _customerController.GetCustomers(inquery);
             var success = result as OkObjectResult;
 
-            Assert.IsNotNull(success, "Request can not be null");
-            Assert.IsInstanceOf<OkObjectResult>(success, "Must be Ok 200");
+            Assert.IsNotNull(success, "Response can not be null");
+            Assert.IsInstanceOf<OkObjectResult>(success, "The result must be Ok 200");
         }
 
         [Test]
@@ -82,7 +81,7 @@ namespace CustomerTransactionTests
             IActionResult result = _customerController.GetCustomers(inquery);
             var success = result as OkObjectResult;
 
-            Assert.IsNotNull(success, "Request can not be null");
+            Assert.IsNotNull(success, "Response can not be null");
             Assert.AreEqual(validCustomerDtoCollection, success.Value);
         }
 
