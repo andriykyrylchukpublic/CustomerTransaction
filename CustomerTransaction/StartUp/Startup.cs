@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace CustomerTransaction.StartUp
 {
@@ -34,7 +35,15 @@ namespace CustomerTransaction.StartUp
             {
                 opts.SuppressModelStateInvalidFilter = true;
             });
-    }
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = Configuration["App:Name"],
+                    Version = Configuration["App:Version"]
+                });
+            });
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -68,7 +77,15 @@ namespace CustomerTransaction.StartUp
             AutomapperConfig.Initialize();
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"/swagger/{Configuration["App:Version"]}/swagger.json", Configuration["App:Name"]);
+            });
+
             app.UseMvc();
+
         }
     }
 }

@@ -22,7 +22,7 @@ namespace CustomerTransaction.Controllers
         /// </summary>
         /// <returns>IEnumerable of CustomerOutputDto</returns>
         [HttpGet]
-        public IActionResult Get(Inquiry inquiry)
+        public IActionResult Get([FromQuery]Inquiry inquiry)
         {
             if (inquiry is null)
             {
